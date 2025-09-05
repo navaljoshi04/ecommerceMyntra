@@ -1,1 +1,85 @@
 @import "tailwindcss";
+
+/* Custom checkbox styles for circular appearance */
+.custom-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #9ca3af;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  position: relative;
+  margin-right: 8px;
+}
+
+.custom-checkbox:checked {
+  background-color: #ec4899;
+  border-color: #ec4899;
+}
+
+.custom-checkbox:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.custom-checkbox:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #ec4899;
+  ring-offset: 2px;
+}
+
+/* Hide default range input styling but keep functionality */
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  appearance: none;
+  -moz-appearance: none;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+input[type="range"]::-ms-thumb {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-track {
+  background: transparent;
+  height: 24px;
+}
+
+input[type="range"]::-moz-range-track {
+  background: transparent;
+  height: 24px;
+}
+
+input[type="range"]::-ms-track {
+  background: transparent;
+  height: 24px;
+}

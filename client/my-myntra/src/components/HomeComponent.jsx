@@ -1,12 +1,34 @@
 import React, { useEffect, useState } from "react";
-
+import { Link } from "react-router-dom";
 const HomeComponent = () => {
   const images = [
-    "https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2022/4/17/abd2b07f-954c-43ad-ba39-bfa50527d0641650180659364-Backpacks---Luggage_Desk.jpg",
-    "https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2022/4/17/eb6408d8-b413-49f7-8525-317fddba53821650180659351-Casual---Sports-Shoes_Desk.jpg",
-    "https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2022/4/17/a53b7f7e-37ab-4319-a1b4-5d9c0cca68601650180659343-Lancer_Desk.jpg",
-    "https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2022/5/3/b54399f0-6ed5-44b3-84b0-e9d5c1657aaa1651599573991-CR7_Desk_Baner.jpg",
+    {
+      image:
+        "https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2022/4/17/abd2b07f-954c-43ad-ba39-bfa50527d0641650180659364-Backpacks---Luggage_Desk.jpg",
+      category: "luggage-backpacks",
+    },
+    {
+      image:
+        "https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2022/4/17/eb6408d8-b413-49f7-8525-317fddba53821650180659351-Casual---Sports-Shoes_Desk.jpg",
+      category: "men/shoes",
+    },
+    {
+      image:
+        "https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2022/4/17/a53b7f7e-37ab-4319-a1b4-5d9c0cca68601650180659343-Lancer_Desk.jpg",
+      category: "brands/lancer",
+    },
+    {
+      image:
+        "https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2022/5/3/b54399f0-6ed5-44b3-84b0-e9d5c1657aaa1651599573991-CR7_Desk_Baner.jpg",
+      category: "brands/cr7",
+    },
+    {
+      image:
+        "https://assets.myntassets.com/f_webp,w_980,c_limit,fl_progressive,dpr_2.0/assets/images/2022/7/25/9be788ff-39a4-4214-99d0-fc97505aae5a1658752545685-USPA_Desk_Banner.jpg",
+      category: "brands/uspa",
+    },
   ];
+
   const [currentIndex, setCurrentIndex] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
@@ -20,11 +42,13 @@ const HomeComponent = () => {
     <>
       <div>
         <div className="flex flex-col items-center justify-center p-4 mt-20">
-          <img
-            src={images[currentIndex]}
-            alt="slider"
-            className="w-full rounded-sm transition-all duration-500"
-          />
+          <Link to={`/products/${images[currentIndex].category}`}>
+            <img
+              src={images[currentIndex].image}
+              alt="slider"
+              className="w-full rounded-sm transition-all duration-500"
+            />
+          </Link>
           <div className="flex gap-3 mt-2">
             {images.map((_, index) => (
               <button
