@@ -197,7 +197,7 @@ export default function Header() {
   }
 
   return (
-    <header className="w-full shadow-md px-6 py-3 bg-white fixed">
+    <header className="w-full shadow-md px-6 py-3 bg-white fixed z-50">
       <div className="grid grid-cols-12 items-center ">
         {/* Left Section (Logo + Nav Links) - takes ~50% */}
         <div className="col-span-6 flex items-center gap-6">

@@ -152,39 +152,6 @@ const ProductComponents = () => {
       </div>
       {/* Main content (changes by categoryKey) */}
 
-      {/* <div className="w-3/4 p-4">
-        <h2>{data.title}</h2>
-        <p>{data.description}</p>
-
-        <div className="grid grid-cols-4 gap-6 px-2 py-2">
-          {loading
-            ? Array(23)
-                .fill(0)
-                .map((_, idx) => <ShimmerCard key={idx} />)
-            : data.items.map((item, index) => {
-                return (
-                  <div
-                    key={index}
-                    className="bg-white p-4 rounded-lg shadow-sm hover:shadow-lg transform hover:scale-105 transition duration-300 hover:cursor-pointer"
-                  >
-                    <img
-                      src={item.img}
-                      alt=""
-                      className="h-80 w-80 object-contain mb-4 ml-4"
-                    />
-                    <h4 className="font-semibold">{item.heading} </h4>
-                    <h8 className="text-gray-400 text-[12px]">
-                      {item.subheading}{" "}
-                    </h8>
-                    <p className=" font-semibold text-[9px]">
-                      ₹{item.price || item.rupees}
-                    </p>
-                  </div>
-                );
-              })}
-        </div>
-      </div> */}
-
       <Cart data={data} loading={loading} />
     </div>
   );
