@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import productData from "../productsData/productData";
 import ShimmerCard from "../ShimmerCard";
 import Cart from "../productsData/Cart";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 const ProductComponents = () => {
   const { category, subcategory } = useParams();
@@ -75,77 +77,166 @@ const ProductComponents = () => {
       {/* Sidebar (same for all categories) */}
 
       <div className="w-1/5 p-4 bg-gray-100 flex flex-col">
-        <div className="p-4 flex justify-between items-center border-b border-gray-300">
-          <h2 className="font-semibold">FILTER</h2>
-          <h4 className="font-semibold text-[#FF3F6C] text-sm cursor-pointer">
-            CLEAR ALL
-          </h4>
-        </div>
-        <div className="p-4 border border-gray-300 m-4 rounded-md bg-white h-full">
-          <ul className="space-y-2 text-sm text-gray-600 font-mono">
-            <li>
-              <input type="checkbox" className="custom-checkbox " />
-              Men
-            </li>
-            <li>
-              <input type="checkbox" className="custom-checkbox" />
-              Women
-            </li>
-            <li>
-              <input type="checkbox" className="custom-checkbox" />
-              Boys
-            </li>
-            <li>
-              <input type="checkbox" className="custom-checkbox" />
-              Girls
-            </li>
-          </ul>
+        <div className="sticky top-20">
+          <div className="p-4 flex justify-between items-center border-b border-gray-300">
+            <h2 className="font-semibold">FILTER</h2>
+            <h4 className="font-semibold text-[#FF3F6C] text-sm cursor-pointer">
+              CLEAR ALL
+            </h4>
+          </div>
+          <div className="p-4 border border-gray-300 m-4 rounded-md bg-white">
+            <ul className="space-y-2 text-sm text-gray-600 font-mono">
+              <li>
+                <input type="checkbox" className="custom-checkbox " />
+                Men
+              </li>
+              <li>
+                <input type="checkbox" className="custom-checkbox" />
+                Women
+              </li>
+              <li>
+                <input type="checkbox" className="custom-checkbox" />
+                Boys
+              </li>
+              <li>
+                <input type="checkbox" className="custom-checkbox" />
+                Girls
+              </li>
+            </ul>
 
-          <div className="border-t border-gray-300 mt-4 pt-4">
-            <h2 className="font-semibold text-sm">PRICE</h2>
-            <div
-              className="relative mt-2"
-              onMouseMove={handleMouseMove}
-              onMouseUp={handleMouseUp}
-              onMouseLeave={handleMouseUp}
-            >
-              {/* Base line */}
-              <div className="border-t border-gray-300 mt-2 h-1"></div>
-
-              {/* Highlighted range */}
+            <div className="border-t border-gray-300 mt-4 pt-4">
+              <h2 className="font-semibold text-sm">PRICE</h2>
               <div
-                className="absolute top-0 h-1 bg-pink-400 rounded"
-                style={{
-                  left: `${percentMin}%`,
-                  right: `${100 - percentMax}%`,
-                }}
-              ></div>
+                className="relative mt-2"
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
+              >
+                {/* Base line */}
+                <div className="border-t border-gray-300 mt-2 h-1"></div>
 
-              {/* Draggable Handles - Left */}
-              <div
-                className="absolute w-3 h-3 bg-pink-500 rounded-full shadow cursor-pointer"
-                style={{
-                  left: `calc(${percentMin}% - 6px)`,
-                  top: "-6px",
-                }}
-                onMouseDown={handleMouseDownMin}
-              ></div>
+                {/* Highlighted range */}
+                <div
+                  className="absolute top-0 h-1 bg-pink-400 rounded"
+                  style={{
+                    left: `${percentMin}%`,
+                    right: `${100 - percentMax}%`,
+                  }}
+                ></div>
 
-              {/* Draggable Handles - Right */}
-              <div
-                className="absolute w-3 h-3 bg-pink-500 rounded-full shadow cursor-pointer"
-                style={{
-                  left: `calc(${percentMax}% - 6px)`,
-                  top: "-6px",
-                }}
-                onMouseDown={handleMouseDownMax}
-              ></div>
+                {/* Draggable Handles - Left */}
+                <div
+                  className="absolute w-3 h-3 bg-pink-500 rounded-full shadow cursor-pointer"
+                  style={{
+                    left: `calc(${percentMin}% - 6px)`,
+                    top: "-6px",
+                  }}
+                  onMouseDown={handleMouseDownMin}
+                ></div>
+
+                {/* Draggable Handles - Right */}
+                <div
+                  className="absolute w-3 h-3 bg-pink-500 rounded-full shadow cursor-pointer"
+                  style={{
+                    left: `calc(${percentMax}% - 6px)`,
+                    top: "-6px",
+                  }}
+                  onMouseDown={handleMouseDownMax}
+                ></div>
+              </div>
+
+              {/* Price display */}
+              <div className="flex justify-between mt-2 text-xs text-gray-600">
+                <span>₹{minVal}</span>
+                <span>₹{maxVal}</span>
+              </div>
             </div>
-
-            {/* Price display */}
-            <div className="flex justify-between mt-2 text-xs text-gray-600">
-              <span>₹{minVal}</span>
-              <span>₹{maxVal}</span>
+            <div className="border-t border-gray-300 mt-4 pt-4">
+              <div className="flex justify-between mt-2">
+                <h4 className="font-semibold text-[12px]">COLOR</h4>
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
+              </div>
+              <div className="mt-2">
+                <ul className="space-y-2 text-sm text-gray-600 font-mono">
+                  <li className="flex items-center space-x-2">
+                    <input type="checkbox" />
+                    <span className="bg-black w-3 h-3 rounded-full"></span>
+                    <span> Black</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <input type="checkbox" />
+                    <span className="bg-white w-3 h-3 rounded-full border border-gray-400"></span>
+                    <span>White</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <input type="checkbox" />
+                    <span className="bg-pink-400 w-3 h-3 rounded-full"></span>
+                    <span> Pink</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <input type="checkbox" />
+                    <span className="bg-gray-400 w-3 h-3 rounded-full"></span>
+                    <span> Grey</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <input type="checkbox" />
+                    <span className="bg-yellow-500 w-3 h-3 rounded-full"></span>
+                    <span> Gold</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <input type="checkbox" />
+                    <span className="bg-red-500 w-3 h-3 rounded-full"></span>
+                    <span> Red</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <input type="checkbox" />
+                    <span className="bg-green-500 w-3 h-3 rounded-full"></span>
+                    <span> Green</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="border-t border-gray-300 mt-4 pt-4">
+              <div className="flex justify-between mt-2">
+                <h4 className="font-semibold text-[12px]">DISCOUNT RANGE</h4>
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
+              </div>
+              <div className="mt-2">
+                <ul className="space-y-2 text-sm text-gray-600 font-mono">
+                  <li className="flex items-center space-x-2">
+                    <input type="checkbox" />
+                    <span> 10 % and above</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <input type="checkbox" />
+                    <span> 20 % and above</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <input type="checkbox" />
+                    <span> 30 % and above</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <input type="checkbox" />
+                    <span> 40 % and above</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <input type="checkbox" />
+                    <span> 50 % and above</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <input type="checkbox" />
+                    <span> 60 % and above</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <input type="checkbox" />
+                    <span> 70 % and above</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <input type="checkbox" />
+                    <span> 80 % and above</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

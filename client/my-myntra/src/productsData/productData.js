@@ -2,8 +2,6 @@ import React from "react";
 
 const productData = {
   "brands/cr7": {
-    title: "CR7 Collection",
-    description: "All products from Cristiano Ronaldo’s brand",
     items: [
       {
         img: "https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/27098146/2024/1/20/6ab37268-0219-470b-bb44-f60834edf0b31705758933957CristianoRonaldoCR7EaudeToilette30ml1.jpg",
@@ -122,8 +120,6 @@ const productData = {
     ],
   },
   "brands/uspa": {
-    title: "USPA Collection",
-    description: "Exclusive USPA apparel",
     items: [
       {
         img: "https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/2025/MARCH/3/IM7OZxHa_6452ee6bb43c46fc916666c81790e981.jpg",
@@ -260,8 +256,6 @@ const productData = {
     ],
   },
   "luggage-backpacks": {
-    title: "Luggage & Backpacks",
-    description: "Travel in style with our range",
     items: [
       {
         img: "https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_210,c_limit,fl_progressive/assets/images/2025/AUGUST/12/MwAbc3wx_94c3330b71a3478a880f944b55793be0.jpg",
@@ -392,8 +386,6 @@ const productData = {
     ],
   },
   "men/shoes": {
-    title: "lancer& Backpacks",
-    description: "Travel in style with our range",
     items: [
       {
         img: "https://assets.myntassets.com/f_webp,dpr_1.5,q_60,w_210,c_limit,fl_progressive/assets/images/27107894/2024/10/7/29a5bfdc-9995-4434-92fc-98ae12170d081728299573318-Sparx-Men-Lace-Up-Mesh-Running-Shoes-4151728299572853-1.jpg",
@@ -536,8 +528,6 @@ const productData = {
     ],
   },
   "brands/lancer": {
-    title: "lancer& Backpacks mes",
-    description: "Travel in style with our range",
     items: [
       {
         img: "https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/2025/SEPTEMBER/1/XZ5K1TPD_1cde9e7cdb684dc1a021263ebcaeb0a8.jpg",
