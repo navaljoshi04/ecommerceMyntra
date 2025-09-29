@@ -2,7 +2,18 @@ import React from "react";
 import ShimmerCard from "../ShimmerCard";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-const Cart = ({ data, loading }) => {
+const Cart = ({ data, loading, maxPrice, minPrice, selectedColors }) => {
+  // Filter items based on price range
+  const filteredItems = loading
+    ? []
+    : data.items.filter((item) => {
+        const itemPrice = item.price || item.rupees;
+        const priceMatch = itemPrice >= minPrice && itemPrice <= maxPrice;
+        const colorMatch =
+          selectedColors.length === 0 || selectedColors.includes(item.color);
+        return priceMatch && colorMatch;
+      });
+
   return (
     <div className="w-3/4 p-4">
       <h2>{data.title}</h2>
@@ -13,7 +24,7 @@ const Cart = ({ data, loading }) => {
           ? Array(23)
               .fill(0)
               .map((_, idx) => <ShimmerCard key={idx} />)
-          : data.items.map((item, index) => {
+          : filteredItems.map((item, index) => {
               return (
                 <div
                   key={index}

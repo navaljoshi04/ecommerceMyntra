@@ -14,15 +14,16 @@ const ProductComponents = () => {
   const data = productData[categoryKey]; // pick correct data
   console.log("data", data);
   const [loading, setLoading] = useState(true);
-  const [minVal, setMinVal] = useState(1000);
+  const [minVal, setMinVal] = useState(100);
   const [maxVal, setMaxVal] = useState(10000);
   const [percentMin, setPercentMin] = useState(0);
   const [percentMax, setPercentMax] = useState(100);
+  const [selectedColors, setSelectedColors] = useState([]);
   const [isDraggingMin, setIsDraggingMin] = useState(false);
   const [isDraggingMax, setIsDraggingMax] = useState(false);
 
   useEffect(() => {
-    const getPercent = (value) => ((value - 1000) / (10000 - 1000)) * 100;
+    const getPercent = (value) => ((value - 100) / (10000 - 100)) * 100;
     setPercentMin(getPercent(minVal));
     setPercentMax(getPercent(maxVal));
   }, [minVal, maxVal]);
@@ -42,8 +43,8 @@ const ProductComponents = () => {
       const rect = e.currentTarget.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const percentage = (x / rect.width) * 100;
-      const value = Math.round(1000 + (percentage / 100) * (10000 - 1000));
-      const clampedValue = Math.max(1000, Math.min(10000, value));
+      const value = Math.round(100 + (percentage / 100) * (10000 - 100));
+      const clampedValue = Math.max(100, Math.min(10000, value));
 
       if (isDraggingMin) {
         setMinVal(clampedValue);
@@ -159,7 +160,17 @@ const ProductComponents = () => {
               <div className="mt-2">
                 <ul className="space-y-2 text-sm text-gray-600 font-mono">
                   <li className="flex items-center space-x-2">
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      checked={selectedColors.includes("black")}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          selectedColors([...selectedColors, "black"]);
+                        } else {
+                          selectedColors.filter((color) => color != "black");
+                        }
+                      }}
+                    />
                     <span className="bg-black w-3 h-3 rounded-full"></span>
                     <span> Black</span>
                   </li>
@@ -243,7 +254,13 @@ const ProductComponents = () => {
       </div>
       {/* Main content (changes by categoryKey) */}
 
-      <Cart data={data} loading={loading} />
+      <Cart
+        data={data}
+        loading={loading}
+        minPrice={minVal}
+        maxPrice={maxVal}
+        selectedColors={selectedColors}
+      />
     </div>
   );
 };
