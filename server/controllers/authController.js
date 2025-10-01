@@ -1,5 +1,7 @@
 import { userModel } from "../models/userModel.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
 const signup = async (req, res) => {
   const { userName, email, contactNumber, password } = req.body;
   if (!userName || !email || !contactNumber || !password) {
@@ -36,11 +38,31 @@ const login = async (req, res) => {
     password,
     checkIfUserExist.password
   );
-
   if (!checkPassword) {
     return res.status(401).json({ message: "Invalid credentials...." });
   }
-  return res.status(200).json({ message: "Logged in successfully ..." });
+  const token = jwt.sign(
+    {
+      email: checkIfUserExist.email,
+      _id: checkIfUserExist._id,
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: "1h" }
+  );
+  res.cookie("token", token);
+  return res.status(200).json({
+    message: "Logged in successfully ...",
+    token,
+    user: {
+      email: checkIfUserExist.email,
+      userName: checkIfUserExist.userName,
+    },
+  });
 };
 
-export { signup, login };
+const logout = async (req, res) => {
+  res.clearCookie("token");
+  return res.status(200).json({ message: "Logged out successfully" });
+};
+
+export { signup, login, logout };

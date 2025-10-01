@@ -21,7 +21,7 @@ const Wishlists = () => {
               className="w-12 h-12 object-contain ml-24 mt-4"
             />
             <button
-              onClick={() => navigate("/login")}
+              onClick={() => navigate("/signup")}
               className="text-blue-600 font-bold px-4 py-4 rounded-md border w-34 mt-4 border-blue-500"
             >
               LOGIN

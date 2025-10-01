@@ -1,87 +1,83 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/signup",
+        formData,
+        {
+          withCredentials: true,
+        }
+      );
+      const { user, token } = response.data;
+      localStorage.setItem("token", token);
+      console.log("logged in user:", user);
+      navigate("/");
+    } catch (error) {
+      console.log("Error while login in myntra: ", error);
+    }
+  };
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const handleChange = (field, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
   return (
-    <div className="flex items-center justify-center min-h-screen bg-pink-100 p-4">
-      <div className="bg-white shadow-lg rounded-lg flex flex-col w-full max-w-md p-6">
-        <img
-          src="https://imgs.search.brave.com/tYzCgbaM6xmYTgvKj7yAxDAao0Vz6yhStVGl6_0l1_g/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90aHVt/Ym5haWwuaW1nYmlu/LmNvbS82LzIxLzI0/L2dyYXBoaWMtZGVz/aWduLWxvZ2luLWVs/ZW1lbnRzLWZvci1z/ZWN1cmUtYWNjZXNz/LUpLWnJmUEhZX3Qu/anBn"
-          alt=""
-          className="object-contain h-24 mx-auto mb-4"
-        />
-        <h2 className="font-semibold text-lg mb-6 text-center">
-          LOGIN <span className="font-light">or</span> SIGNUP
-        </h2>
+    <div className="bg-blue-50 min-h-screen mt-16 grid ">
+      <div className="shadow-white m-12  bg-pink-100 w-3/5 justify-self-center rounded-md">
+        <div className="mt-8">
+          <h2 className="text-center font-bold text-[22px] ">LOGIN</h2>
+          <form
+            action=""
+            onSubmit={handleLogin}
+            className="mt-12 border border-red-500 w-4/5 mx-auto h-78 shadow shadow-pink-600"
+          >
+            <div>
+              <label
+                htmlFor="email"
+                className="px-4 py-2 font-light text-[18px] ml-8 mt-12"
+              >
+                Email:
+              </label>
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) => handleChange("email", e.target.value)}
+                className="border w-2/4 rounded-md border-blue-700 mt-12 px-4 py-2"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="password"
+                className="px-4 py-2 font-light text-[18px] ml-8 mt-12"
+              >
+                Pass:
+              </label>
+              <input
+                type="password"
+                value={formData.password}
+                onChange={(e) => handleChange("password", e.target.value)}
+                className="border w-2/4 rounded-md border-blue-700 mt-12 px-4 py-2"
+              />
+            </div>
 
-        <div className="bg-pink-50 p-6 rounded-lg shadow-md">
-          {/* Contact Number */}
-          <div className="flex flex-col mb-4">
-            <label
-              htmlFor="contact"
-              className="font-poppins text-pink-600 font-medium mb-1"
+            <button
+              type="submit"
+              className="px-4 py-4 w-2/6 text-center ml-34 mt-8 bg-green-400 shadow shadow-fuchsia-400 h-12 hover:cursor-pointer hover:bg-green-500 hover:text-white"
             >
-              Contact number
-            </label>
-            <input
-              type="tel"
-              id="contact"
-              placeholder="Enter mobile number"
-              className="border border-gray-400 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400"
-            />
-          </div>
-
-          {/* User Name */}
-          <div className="flex flex-col mb-4">
-            <label
-              htmlFor="user"
-              className="font-poppins text-pink-600 font-medium mb-1"
-            >
-              User Name
-            </label>
-            <input
-              type="text"
-              id="user"
-              placeholder="Enter user name"
-              className="border border-gray-400 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400"
-            />
-          </div>
-
-          {/* Email */}
-          <div className="flex flex-col mb-4">
-            <label
-              htmlFor="email"
-              className="font-poppins text-pink-600 font-medium mb-1"
-            >
-              Email ID
-            </label>
-            <input
-              type="email"
-              id="email"
-              placeholder="Enter email"
-              className="border border-gray-400 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400"
-            />
-          </div>
-
-          {/* Password */}
-          <div className="flex flex-col mb-4">
-            <label
-              htmlFor="password"
-              className="font-poppins text-pink-600 font-medium mb-1"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Enter password"
-              className="border border-gray-400 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-400"
-            />
-          </div>
-
-          {/* Submit Button */}
-          <button className="w-full bg-pink-500 text-white py-2 rounded-md font-medium hover:bg-pink-600 transition">
-            Continue
-          </button>
+              LOGIN
+            </button>
+          </form>
         </div>
       </div>
     </div>

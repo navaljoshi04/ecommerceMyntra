@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import HomeComponent from "./components/HomeComponent";
 import ProductComponents from "./components/ProductComponents";
 import Wishlists from "./components/Wishlists";
+import Signup from "./components/Signup";
 import Login from "./components/Login";
 
 const App = () => {
@@ -20,8 +21,10 @@ const App = () => {
           element={<ProductComponents />}
         />
         <Route path="/wishlist" element={<Wishlists />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
       </Routes>
+      {location.pathname != "/signup" && <Footer />}
       {location.pathname != "/login" && <Footer />}
     </div>
   );
