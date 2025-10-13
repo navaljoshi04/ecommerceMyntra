@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import { connectWithDataBase } from "./database/database.js";
 import authRoutes from "./routes/authRoutes.js";
+import productRoutes from "./routes/productRoutes.js";
 import cors from "cors";
 
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/product", productRoutes);
 
 const PORT = process.env.PORT;
 connectWithDataBase();

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../slices/authActions";
+
 const Signup = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -8,6 +10,7 @@ const Signup = () => {
     contactNumber: "",
     password: "",
   });
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [alertMsg, setAlertMsg] = useState("");
   const handleChange = (field, value) => {
@@ -17,19 +20,33 @@ const Signup = () => {
     }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     try {
-      axios.post("http://localhost:3000/api/auth/signup", formData);
-      setAlertMsg("user signed up successfully");
-      navigate("/login");
-      setFormData({
-        email: "",
-        userName: "",
-        contactNumber: "",
-        password: "",
-      });
+      const resultAction = await dispatch(
+        registerUser({
+          email: formData.email,
+          userName: formData.userName,
+          contactNumber: formData.contactNumber,
+          password: formData.password,
+        })
+      );
+
+      if (registerUser.fulfilled.match(resultAction)) {
+        setAlertMsg("user signed up successfully");
+        navigate("/login");
+        setFormData({
+          email: "",
+          userName: "",
+          contactNumber: "",
+          password: "",
+        });
+      } else if (registerUser.rejected.match(resultAction)) {
+        console.log("Signup failed:", resultAction.payload);
+        setAlertMsg(resultAction.payload || "Signup failed");
+      }
     } catch (error) {
       console.log("Error while submitting the data", error);
+      setAlertMsg("An error occurred during signup");
     }
   };
   return (

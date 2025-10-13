@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ShimmerCard from "../ShimmerCard";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,6 +14,15 @@ const Cart = ({ data, loading, maxPrice, minPrice, selectedColors }) => {
         return priceMatch && colorMatch;
       });
 
+  const [wishlist, setWishlist] = useState({});
+  const handleWishlist = (itemID) => {
+    console.log(itemID, "itemID");
+    setWishlist((prev) => ({
+      ...prev,
+      [itemID]: true,
+    }));
+    console.log("wishlist cliked");
+  };
   return (
     <div className="w-3/4 p-4">
       <h2>{data.title}</h2>
@@ -37,14 +46,26 @@ const Cart = ({ data, loading, maxPrice, minPrice, selectedColors }) => {
                   />
 
                   {/* Wishlist box (hidden until hover) */}
-                  <div className="absolute bottom-4 left-4 right-4 bg-white border border-gray-200 rounded-lg px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md">
-                    <div className="flex items-center justify-center">
+                  <div
+                    className={`absolute bottom-4 left-4 right-4 border border-gray-200 rounded-lg px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md z-10 ${
+                      wishlist[index] ? "bg-gray-700 text-white" : "bg-white"
+                    }`}
+                  >
+                    <div
+                      className="flex items-center justify-center
+                      "
+                    >
                       <FontAwesomeIcon
                         icon={faHeart}
-                        className="mr-2 text-blue-200"
+                        className={`${
+                          wishlist[index] ? "text-pink-500" : "text-blue-200"
+                        } mr-2 `}
                       />
-                      <span className="font-semibold text-[10px] ">
-                        WISHLIST
+                      <span
+                        onClick={() => handleWishlist(index)}
+                        className="font-semibold text-[10px]"
+                      >
+                        {wishlist[index] ? " WISHLISTED" : "WISHLIST"}
                       </span>
                     </div>
                   </div>
